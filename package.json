@@ -1,0 +1,43 @@
+{
+  "name": "gendiff-cake",
+  "version": "0.0.1",
+  "description": "Difference calculator app by Cognitive Cake",
+  "main": "index.js",
+  "scripts": {
+    "babel-node": "babel-node",
+    "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
+    "build-win": "SET NODE_ENV=production & babel src --out-dir dist --source-maps inline",
+    "prepublishOnly": "npm run build",
+    "eslint": "eslint"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cognitive-cake/project-lvl2-s233.git"
+  },
+  "keywords": [
+    "difference",
+    "diff",
+    "diffcalc",
+    "gendiff",
+    "hexlet"
+  ],
+  "author": "Cognitive Cake",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cognitive-cake/project-lvl2-s233/issues"
+  },
+  "homepage": "https://github.com/cognitive-cake/project-lvl2-s233#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.1",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "eslint": "^4.16.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0"
+  }
+}
