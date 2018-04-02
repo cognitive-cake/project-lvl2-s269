@@ -3,7 +3,9 @@
 import commander from 'commander';
 
 commander
-  .version('0.1.0', '-v, --version')
-  .option('-t, --test', 'test test test')
+  .description('Compares two configuration files and shows a difference.')
+  .version('0.1.1', '-v, --version')
+  .option('-f, --format [type]', 'Output format')
   .parse(process.argv);
 
+if (!commander.args.length) commander.help();
