@@ -1,12 +1,15 @@
 {
   "name": "gendiff-cake",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Difference calculator app by Cognitive Cake",
-  "main": "index.js",
+  "main": "./src/bin/gendiff.js",
+  "bin": {
+    "gendiff": "dist/bin/gendiff.js"
+  },
   "scripts": {
     "babel-node": "babel-node",
-    "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
-    "build-win": "SET NODE_ENV=production & babel src --out-dir dist --source-maps inline",
+    "build-ux": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
+    "build": "SET NODE_ENV=production & babel src --out-dir dist --source-maps inline",
     "prepublishOnly": "npm run build",
     "eslint": "eslint"
   },
@@ -39,5 +42,8 @@
     "eslint": "^4.16.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0"
+  },
+  "dependencies": {
+    "commander": "^2.15.1"
   }
 }
