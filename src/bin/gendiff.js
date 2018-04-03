@@ -7,7 +7,6 @@ import programm from 'commander';
 programm
   .arguments('<firstConfig> <secondConfig>')
   .description('Compares two configuration files and shows a difference.')
-  .version('0.2.0', '-v, --version')
   .option('-f, --format [type]', 'output format')
   .parse(process.argv);
 
