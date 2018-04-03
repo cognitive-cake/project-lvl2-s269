@@ -1,12 +1,20 @@
 #!/usr/bin/env node
 
-import commander from 'commander';
+import programm from 'commander';
+// import fs from 'fs';
+// import _ from 'lodash';
 
-commander
+programm
   .arguments('<firstConfig> <secondConfig>')
   .description('Compares two configuration files and shows a difference.')
-  .version('0.1.3', '-v, --version')
+  .version('0.2.0', '-v, --version')
   .option('-f, --format [type]', 'output format')
   .parse(process.argv);
 
-if (!commander.args.length) commander.help();
+if (!programm.args.length) programm.help();
+
+programm
+  .command('<firstConfig> <secondConfig>')
+  .action((firstConfig, secondConfig) => {
+    console.log('blabla', firstConfig, secondConfig);
+  });
