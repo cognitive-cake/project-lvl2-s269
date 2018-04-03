@@ -1,20 +1,15 @@
 #!/usr/bin/env node
 
 import programm from 'commander';
-// import fs from 'fs';
-// import _ from 'lodash';
+import genDiff from '..';
 
 programm
   .arguments('<firstConfig> <secondConfig>')
   .description('Compares two configuration files and shows a difference.')
-  .version('0.2.2', '-v, --version')
+  .version('0.2.3', '-v, --version')
   .option('-f, --format [type]', 'output format')
+  .command('<firstConfig> <secondConfig>')
+  .action(genDiff)
   .parse(process.argv);
 
 if (!programm.args.length) programm.help();
-
-programm
-  .command('<firstConfig> <secondConfig>')
-  .action((firstConfig, secondConfig) => {
-    console.log('blabla', firstConfig, secondConfig);
-  });
