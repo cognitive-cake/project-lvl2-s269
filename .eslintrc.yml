@@ -3,8 +3,13 @@ env:
 
 parser: babel-eslint
 
+plugins:
+  - 'fp'
+
 extends:
+  - 'plugin:fp/recommended'
   - 'airbnb-base'
 
 rules:
   no-console: 0
+  fp/no-unused-expression: 1 # чтобы не ругался на вызов консоли. TODO: убрать после релиза
