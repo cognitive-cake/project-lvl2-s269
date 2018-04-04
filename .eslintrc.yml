@@ -12,4 +12,4 @@ extends:
 
 rules:
   no-console: 0
-  fp/no-unused-expression: 1 # чтобы не ругался на вызов консоли. TODO: убрать после релиза
+  fp/no-unused-expression: 0 # чтобы не ругался на вызов консоли. TODO: убрать после релиза

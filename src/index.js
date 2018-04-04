@@ -24,9 +24,12 @@ const genDiff = (pathToFile1, pathToFile2) => {
     .map(k => `  + ${k}: ${obj2[k]}\n`)
     .concat('}');
 
+  const result = diffs.concat(obj2NewProps).join('');
+
   console.log('obj1 = ', obj1);
   console.log('obj2 = ', obj2);
-  return console.log(diffs.concat(obj2NewProps).join(''));
+  console.log(result);
+  return result;
 };
 
 export default genDiff;

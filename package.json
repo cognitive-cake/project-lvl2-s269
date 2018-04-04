@@ -11,7 +11,8 @@
     "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
     "build-win": "SET NODE_ENV=production & babel src --out-dir dist --source-maps inline",
     "prepublishOnly": "npm run build",
-    "eslint": "eslint"
+    "eslint": "eslint",
+    "test": "jest"
   },
   "files": [
     "dist"
