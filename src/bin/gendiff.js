@@ -5,7 +5,7 @@ import genDiff from '..';
 
 programm
   .description('Compares two configuration files and shows a difference.')
-  .version('0.2.7', '-v, --version')
+  .version('0.2.8', '-v, --version')
   .option('-f, --format [type]', 'output format')
   .arguments('<firstConfig> <secondConfig>')
   .action(genDiff)

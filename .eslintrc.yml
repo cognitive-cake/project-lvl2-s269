@@ -5,10 +5,12 @@ parser: babel-eslint
 
 plugins:
   - 'fp'
+  - 'jest'
 
 extends:
-  - 'plugin:fp/recommended'
   - 'airbnb-base'
+  - 'plugin:jest/recommended'
+  - 'plugin:fp/recommended'
 
 rules:
   no-console: 0

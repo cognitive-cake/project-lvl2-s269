@@ -15,21 +15,22 @@ const genDiff = (pathToFile1, pathToFile2) => {
   const obj1 = JSON.parse(fileContent1);
   const obj2 = JSON.parse(fileContent2);
 
-  const diffs = Object
-    .keys(obj1)
-    .reduce((arr, k) => [...arr, (_.has(obj2, k) ? getDiffOfVal(k, obj1, obj2) : `  - ${k}: ${obj1[k]}\n`)], ['{\n']);
+  const keys1 = Object.keys(obj1);
+  const keys2 = Object.keys(obj2);
 
-  const obj2NewProps = Object
-    .keys(obj2)
-    .filter(k => !(_.has(obj1, k)))
-    .map(k => `  + ${k}: ${obj2[k]}\n`)
-    .concat('}');
+  const diff = _.union(keys1, keys2)
+    .map((k) => {
+      if (_.has(obj1, k) && _.has(obj2, k)) {
+        return getDiffOfVal(k, obj1, obj2);
+      }
+      if (!(_.has(obj1, k))) {
+        return `  + ${k}: ${obj2[k]}\n`;
+      }
+      return `  - ${k}: ${obj1[k]}\n`;
+    });
 
-  const result = diffs.concat(obj2NewProps).join('');
+  const result = ['{\n'].concat(diff).concat('}').join('');
 
-  // console.log('obj1 = ', obj1);
-  // console.log('obj2 = ', obj2);
-  // console.log(result);
   return result;
 };
 
