@@ -5,7 +5,7 @@ export const getDiffOfVal = (key, obj1, obj2) => {
   if (obj1[key] === obj2[key]) {
     return `    ${key}: ${obj1[key]}\n`;
   }
-  return `  -  ${key}: ${obj1[key]}\n  +  ${key}: ${obj2[key]}\n`;
+  return `  + ${key}: ${obj2[key]}\n  - ${key}: ${obj1[key]}\n`;
 };
 
 
@@ -17,19 +17,19 @@ const genDiff = (pathToFile1, pathToFile2) => {
 
   const diffs = Object
     .keys(obj1)
-    .reduce((arr, k) => [...arr, (_.has(k, obj2) ? getDiffOfVal(k, obj1, obj2) : `  - ${k}: ${obj1[k]}\n`)], ['{\n']);
+    .reduce((arr, k) => [...arr, (_.has(obj2, k) ? getDiffOfVal(k, obj1, obj2) : `  - ${k}: ${obj1[k]}\n`)], ['{\n']);
 
   const obj2NewProps = Object
     .keys(obj2)
-    .filter(k => !(_.has(k, obj1)))
+    .filter(k => !(_.has(obj1, k)))
     .map(k => `  + ${k}: ${obj2[k]}\n`)
     .concat('}');
 
   const result = diffs.concat(obj2NewProps).join('');
 
-  console.log('obj1 = ', obj1);
-  console.log('obj2 = ', obj2);
-  console.log(result);
+  // console.log('obj1 = ', obj1);
+  // console.log('obj2 = ', obj2);
+  // console.log(result);
   return result;
 };
 
