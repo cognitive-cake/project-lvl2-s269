@@ -1,6 +1,6 @@
 /* eslint-disable */
 import fs from 'fs';
-import genDiff from '..';
+import genDiff from '../dist/..';
 
 const expected = fs.readFileSync('__tests__/__fixtures__/expected.txt', 'utf-8');
 
