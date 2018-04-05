@@ -12,3 +12,6 @@ lint:
 
 test:
 	npm test
+
+test-dev:
+	npm run test-dev
