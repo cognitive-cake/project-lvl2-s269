@@ -1,8 +1,6 @@
 install:
 	npm install
 
-start:
-
 build:
 	npm run build
 
@@ -11,3 +9,6 @@ publish:
 
 lint:
 	npm run eslint
+
+test:
+	npm test
