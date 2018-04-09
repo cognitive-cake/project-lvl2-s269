@@ -5,9 +5,9 @@ import genDiff from '..';
 
 programm
   .description('Compares two configuration files and shows a difference.')
-  .version('0.2.11', '-v, --version')
+  .version('0.2.12', '-v, --version')
   .arguments('<firstConfig> <secondConfig>')
-  .action(genDiff)
+  .action((firstConfig, secondConfig) => console.log(genDiff(firstConfig, secondConfig)))
   .parse(process.argv);
 
 if (!programm.args.length) programm.help();
