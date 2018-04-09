@@ -1,18 +1,5 @@
 import fs from 'fs';
-import path from 'path';
 import _ from 'lodash';
-
-const adapter = (pathToFile1, pathToFile2) => {
-  const fileExtension = path.extname(pathToFile1);
-  const mapping = {
-    .json: JSON.parse(fileContent1),
-    .yml: JSON.parse(fileContent1),
-    .yaml: JSON.parse(fileContent1),
-  };
-  return mapping[fileExtension];
-};
-
-// На вход принимаются два файла. Нужно: определить формат, на основе формата выбрать правильный парсер.
 
 const genDiff = (pathToFile1, pathToFile2) => {
   const fileContent1 = fs.readFileSync(pathToFile1);
