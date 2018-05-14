@@ -1,6 +1,6 @@
 {
   "name": "gendiff-cake",
-  "version": "0.2.12",
+  "version": "0.2.13",
   "description": "Difference calculator app by Cognitive Cake",
   "main": "dist/index.js",
   "bin": {
@@ -23,7 +23,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cognitive-cake/project-lvl2-s233.git"
+    "url": "git+https://github.com/cognitive-cake/project-lvl2-s257.git"
   },
   "keywords": [
     "difference",
@@ -35,9 +35,9 @@
   "author": "Cognitive Cake",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/cognitive-cake/project-lvl2-s233/issues"
+    "url": "https://github.com/cognitive-cake/project-lvl2-s257/issues"
   },
-  "homepage": "https://github.com/cognitive-cake/project-lvl2-s233#readme",
+  "homepage": "https://github.com/cognitive-cake/project-lvl2-s257#readme",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
