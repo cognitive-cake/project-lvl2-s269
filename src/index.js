@@ -24,7 +24,7 @@ const genDiff = (pathToFile1, pathToFile2) => {
       return `  - ${k}: ${obj1[k]}`;
     });
 
-  const result = `{\n${_.flatten(diff).join('\n')}}`;
+  const result = `{\n${_.flatten(diff).join('\n')}\n}`;
 
   return result;
 };
