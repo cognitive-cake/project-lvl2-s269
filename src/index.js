@@ -14,17 +14,17 @@ const genDiff = (pathToFile1, pathToFile2) => {
     .map((k) => {
       if (_.has(obj1, k) && _.has(obj2, k)) {
         if (obj1[k] === obj2[k]) {
-          return `    ${k}: ${obj1[k]}\n`;
+          return `    ${k}: ${obj1[k]}`;
         }
-        return `  + ${k}: ${obj2[k]}\n  - ${k}: ${obj1[k]}\n`;
+        return [`  + ${k}: ${obj2[k]}`, `  - ${k}: ${obj1[k]}`];
       }
       if (!(_.has(obj1, k))) {
-        return `  + ${k}: ${obj2[k]}\n`;
+        return `  + ${k}: ${obj2[k]}`;
       }
-      return `  - ${k}: ${obj1[k]}\n`;
+      return `  - ${k}: ${obj1[k]}`;
     });
 
-  const result = `{\n${diff.join('')}}`;
+  const result = `{\n${_.flatten(diff).join('\n')}}`;
 
   return result;
 };
