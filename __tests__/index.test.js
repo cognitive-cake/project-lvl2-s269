@@ -16,3 +16,11 @@ test('genDiff test - YAML', () => {
 
   return expect(genDiff(exampleBefore, exampleAfter)).toEqual(expectedDiff);
 });
+
+test('genDiff test - INI', () => {
+  const expectedDiff = fs.readFileSync('__tests__/__fixtures__/expected-diff.txt', 'utf-8');
+  const exampleBefore = '__tests__/__fixtures__/before.ini';
+  const exampleAfter = '__tests__/__fixtures__/after.ini';
+
+  return expect(genDiff(exampleBefore, exampleAfter)).toEqual(expectedDiff);
+});
