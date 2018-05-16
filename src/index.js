@@ -1,11 +1,16 @@
 import fs from 'fs';
+import path from 'path';
 import _ from 'lodash';
+import parse from './parse';
 
 const genDiff = (pathToFile1, pathToFile2) => {
   const fileContent1 = fs.readFileSync(pathToFile1);
   const fileContent2 = fs.readFileSync(pathToFile2);
-  const obj1 = JSON.parse(fileContent1);
-  const obj2 = JSON.parse(fileContent2);
+  const ext1 = path.extname(pathToFile1);
+  const ext2 = path.extname(pathToFile2);
+
+  const obj1 = parse(ext1)(fileContent1);
+  const obj2 = parse(ext2)(fileContent2);
 
   const keys1 = Object.keys(obj1);
   const keys2 = Object.keys(obj2);

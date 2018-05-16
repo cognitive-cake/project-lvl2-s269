@@ -15,3 +15,4 @@ extends:
 rules:
   no-console: 0
   fp/no-unused-expression: 0 # чтобы не ругался на вызов консоли. TODO: убрать после релиза
+  fp/no-nil: 0 # требует return после switch, конфликтует с базовыми правилами
