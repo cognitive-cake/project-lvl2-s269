@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import _ from 'lodash';
-import parse from './parser';
+import getParser from './parser';
 
 const genDiff = (pathToFile1, pathToFile2) => {
   const fileContent1 = fs.readFileSync(pathToFile1, 'utf-8');
@@ -9,8 +9,8 @@ const genDiff = (pathToFile1, pathToFile2) => {
   const ext1 = path.extname(pathToFile1);
   const ext2 = path.extname(pathToFile2);
 
-  const obj1 = parse(ext1)(fileContent1);
-  const obj2 = parse(ext2)(fileContent2);
+  const obj1 = getParser(ext1)(fileContent1);
+  const obj2 = getParser(ext2)(fileContent2);
 
   const keys1 = Object.keys(obj1);
   const keys2 = Object.keys(obj2);
