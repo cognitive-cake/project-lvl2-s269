@@ -10,7 +10,7 @@ const parsers = {
 
 const parse = (ext) => {
   if (!parsers[ext]) {
-    return console.log(`unsupported file format ${ext}`);
+    throw new Error(`unsupported file format ${ext}`);
   }
   return parsers[ext];
 };
