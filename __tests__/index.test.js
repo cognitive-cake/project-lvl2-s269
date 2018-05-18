@@ -24,3 +24,12 @@ test('genDiff test - INI', () => {
 
   return expect(genDiff(exampleBefore, exampleAfter)).toEqual(expectedDiff);
 });
+
+
+test('genDiff test - JSON nested', () => {
+  const expectedDiff = fs.readFileSync('__tests__/__fixtures__/expected-diff-nested.txt', 'utf-8');
+  const exampleBefore = '__tests__/__fixtures__/nested/before.json';
+  const exampleAfter = '__tests__/__fixtures__/nested/after.json';
+
+  return expect(genDiff(exampleBefore, exampleAfter)).toEqual(expectedDiff);
+});

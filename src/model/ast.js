@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-const isObject = obj => (obj instanceof Object) && !(obj instanceof Array);
+export const isObject = obj => (obj instanceof Object) && !(obj instanceof Array);
 
 const genAST = (obj1, obj2) => {
   const obj1Keys = Object.keys(obj1);

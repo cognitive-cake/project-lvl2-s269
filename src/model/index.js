@@ -1,5 +1,5 @@
 import getParser from './parser';
-import genAST from './ast';
+import { genAST, isObject } from './ast';
 
-export { getParser as default, genAST };
+export { getParser as default, genAST, isObject };
 
