@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import _ from 'lodash';
-import getParser from './parser';
+import getParser from './model';
 
 const genDiff = (pathToFile1, pathToFile2) => {
   const fileContent1 = fs.readFileSync(pathToFile1, 'utf-8');
