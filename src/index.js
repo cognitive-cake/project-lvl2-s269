@@ -12,7 +12,7 @@ const stringify = (val, tabLvl) => {
   return val;
 };
 
-const render = (arr, tabLvl) => arr.map(({
+const renderJsonDiff = (arr, tabLvl) => arr.map(({
   key,
   keyStatus,
   value: [valBefore, valAfter],
@@ -23,7 +23,7 @@ const render = (arr, tabLvl) => arr.map(({
   }
   if (keyStatus === 'include' && !(_.isEqual(valBefore, valAfter))) {
     if (_.isPlainObject(valBefore) && _.isPlainObject(valAfter)) {
-      return `${_.repeat(tab, tabLvl)}  ${key}: {\n${_.flatten(render(children, tabLvl + 2)).join('\n')}\n${_.repeat(tab, tabLvl + 1)}}`;
+      return `${_.repeat(tab, tabLvl)}  ${key}: {\n${_.flatten(renderJsonDiff(children, tabLvl + 2)).join('\n')}\n${_.repeat(tab, tabLvl + 1)}}`;
     }
     return [`${_.repeat(tab, tabLvl)}+ ${key}: ${stringify(valAfter, tabLvl)}`, `${_.repeat(tab, tabLvl)}- ${key}: ${stringify(valBefore, tabLvl)}`];
   }
@@ -35,7 +35,7 @@ const render = (arr, tabLvl) => arr.map(({
 
 const renderDiff = (pathToFile1, pathToFile2) => {
   const ast = processData(pathToFile1, pathToFile2);
-  return `{\n${_.flatten(render(ast, 1)).join('\n')}\n}`;
+  return `{\n${_.flatten(renderJsonDiff(ast, 1)).join('\n')}\n}`;
 };
 
 export default renderDiff;
