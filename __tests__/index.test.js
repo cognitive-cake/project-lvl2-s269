@@ -33,3 +33,19 @@ test('genDiff test - JSON nested', () => {
 
   return expect(genDiff(exampleBefore, exampleAfter)).toEqual(expectedDiff);
 });
+
+test('genDiff test - YAML nested', () => {
+  const expectedDiff = fs.readFileSync('__tests__/__fixtures__/expected-diff-nested.txt', 'utf-8');
+  const exampleBefore = '__tests__/__fixtures__/nested/before.yml';
+  const exampleAfter = '__tests__/__fixtures__/nested/after.yml';
+
+  return expect(genDiff(exampleBefore, exampleAfter)).toEqual(expectedDiff);
+});
+
+test('genDiff test - INI nested', () => {
+  const expectedDiff = fs.readFileSync('__tests__/__fixtures__/expected-diff-nested.txt', 'utf-8');
+  const exampleBefore = '__tests__/__fixtures__/nested/before.ini';
+  const exampleAfter = '__tests__/__fixtures__/nested/after.ini';
+
+  return expect(genDiff(exampleBefore, exampleAfter)).toEqual(expectedDiff);
+});
