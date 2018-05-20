@@ -27,10 +27,10 @@ const renderJsonDiff = (arr, tabLvl) => arr.map(({
   value: [valBefore, valAfter],
   children,
 }) => {
-  if (keyStatus === 'include' && _.isEqual(valBefore, valAfter)) {
+  if (keyStatus === 'not updated') {
     return `${_.repeat(tab, tabLvl)}  ${key}: ${stringify(valBefore, tabLvl)}`;
   }
-  if (keyStatus === 'include' && !(_.isEqual(valBefore, valAfter))) {
+  if (keyStatus === 'updated') {
     if (isPlainObject(valBefore) && isPlainObject(valAfter)) {
       return `${_.repeat(tab, tabLvl)}  ${key}: {\n${_.flatten(renderJsonDiff(children, tabLvl + 2)).join('\n')}\n${_.repeat(tab, tabLvl + 1)}}`;
     }

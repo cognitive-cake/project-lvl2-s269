@@ -25,8 +25,12 @@ const genAST = (obj1, obj2) => {
       check: key => !(obj2Keys.includes(key)),
     },
     {
-      status: 'include',
-      check: key => obj1Keys.includes(key) && obj2Keys.includes(key),
+      status: 'updated',
+      check: key => !(_.isEqual(obj1[key], obj2[key])),
+    },
+    {
+      status: 'not updated',
+      check: key => _.isEqual(obj1[key], obj2[key]),
     },
   ];
 
