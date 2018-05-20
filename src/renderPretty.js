@@ -2,18 +2,8 @@ import _ from 'lodash';
 
 const tab = '  ';
 
-const isPlainObject = (val) => {
-  if (!(val instanceof Object)) {
-    return false;
-  }
-  if ((val instanceof Object) && !(val instanceof Array)) {
-    return true;
-  }
-  return false;
-};
-
 const stringify = (val, tabLvl) => {
-  if (!isPlainObject(val)) {
+  if (!_.isPlainObject(val)) {
     return val;
   }
   const result = Object.keys(val)
@@ -21,7 +11,7 @@ const stringify = (val, tabLvl) => {
   return `{\n${result.join('\n')}\n${_.repeat(tab, tabLvl + 1)}}`;
 };
 
-const renderJsonDiff = (arr, tabLvl) => arr.map(({
+const renderPrettyDiff = (arr, tabLvl) => arr.map(({
   key,
   keyStatus,
   value: [valBefore, valAfter],
@@ -31,8 +21,8 @@ const renderJsonDiff = (arr, tabLvl) => arr.map(({
     return `${_.repeat(tab, tabLvl)}  ${key}: ${stringify(valBefore, tabLvl)}`;
   }
   if (keyStatus === 'updated') {
-    if (isPlainObject(valBefore) && isPlainObject(valAfter)) {
-      return `${_.repeat(tab, tabLvl)}  ${key}: {\n${_.flatten(renderJsonDiff(children, tabLvl + 2)).join('\n')}\n${_.repeat(tab, tabLvl + 1)}}`;
+    if (_.isPlainObject(valBefore) && _.isPlainObject(valAfter)) {
+      return `${_.repeat(tab, tabLvl)}  ${key}: {\n${_.flatten(renderPrettyDiff(children, tabLvl + 2)).join('\n')}\n${_.repeat(tab, tabLvl + 1)}}`;
     }
     return [`${_.repeat(tab, tabLvl)}+ ${key}: ${stringify(valAfter, tabLvl)}`, `${_.repeat(tab, tabLvl)}- ${key}: ${stringify(valBefore, tabLvl)}`];
   }
@@ -42,4 +32,4 @@ const renderJsonDiff = (arr, tabLvl) => arr.map(({
   return `${_.repeat(tab, tabLvl)}- ${key}: ${stringify(valBefore, tabLvl)}`;
 });
 
-export default renderJsonDiff;
+export default renderPrettyDiff;
