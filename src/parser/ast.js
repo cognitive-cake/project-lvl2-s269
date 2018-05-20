@@ -1,15 +1,5 @@
 import _ from 'lodash';
 
-const isPlainObject = (val) => {
-  if (!(val instanceof Object)) {
-    return false;
-  }
-  if ((val instanceof Object) && !(val instanceof Array)) {
-    return true;
-  }
-  return false;
-};
-
 const genAST = (obj1, obj2) => {
   const obj1Keys = Object.keys(obj1);
   const obj2Keys = Object.keys(obj2);
@@ -35,18 +25,20 @@ const genAST = (obj1, obj2) => {
   ];
 
   const getKeyStatus = key => _.find(keyStatuses, ({ check }) => check(key)).status;
+  const setValue = key => [obj1[key], obj2[key]];
+  const setChildren = key => ((_.isPlainObject(obj1[key]) && _.isPlainObject(obj2[key])) ?
+    genAST(obj1[key], obj2[key]) : []);
 
 
   const genNode = (key) => {
-    const template = {
+    const node = {
       key,
       keyStatus: getKeyStatus(key),
-      value: [obj1[key], obj2[key]],
-      children: (isPlainObject(obj1[key]) && isPlainObject(obj2[key])) ?
-        genAST(obj1[key], obj2[key]) : [],
+      value: setValue(key),
+      children: setChildren(key),
     };
 
-    return template;
+    return node;
   };
 
   return allKeys.map(key => genNode(key));
