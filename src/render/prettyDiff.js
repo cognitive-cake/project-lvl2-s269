@@ -11,7 +11,7 @@ const stringify = (val, tabLvl) => {
   return `{\n${result.join('\n')}\n${_.repeat(tab, tabLvl + 1)}}`;
 };
 
-const renderStyle = {
+const diffStyles = {
 
   nested: (name, value, tabLvl, renderFunc) =>
     `${_.repeat(tab, tabLvl)}  ${name}: {\n${_.flatten(renderFunc(value, tabLvl + 2)).join('\n')}\n${_.repeat(tab, tabLvl + 1)}}`,
@@ -35,6 +35,6 @@ const renderStyle = {
 };
 
 const renderPrettyDiff = (ast, tabLvl) => ast.map(({ name, type, value }) =>
-  renderStyle[type](name, value, tabLvl, renderPrettyDiff));
+  diffStyles[type](name, value, tabLvl, renderPrettyDiff));
 
 export default renderPrettyDiff;
