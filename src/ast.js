@@ -1,32 +1,55 @@
 import _ from 'lodash';
 
 const keyTypes = [
+
   {
     type: 'nested',
     check: (key, firstConfig, secondConfig) =>
       _.isPlainObject(firstConfig[key]) && _.isPlainObject(secondConfig[key]),
-    process: (firstConfig, secondConfig, genAST) => genAST(firstConfig, secondConfig),
+    process: (firstValue, secondValue, genAST) => ({
+      value: {
+        oldValue: firstValue,
+        newValue: secondValue,
+      },
+      children: genAST(firstValue, secondValue),
+    }),
   },
+
   {
     type: 'added',
     check: (key, firstConfig) => !(_.has(firstConfig, key)),
-    process: (firstConfig, secondConfig) => _.identity(secondConfig),
+    process: (firstValue, secondValue) => ({
+      value: secondValue,
+    }),
   },
+
   {
     type: 'deleted',
     check: (key, firstConfig, secondConfig) => !(_.has(secondConfig, key)),
-    process: firstConfig => _.identity(firstConfig),
+    process: firstValue => ({
+      value: firstValue,
+    }),
   },
+
   {
     type: 'updated',
     check: (key, firstConfig, secondConfig) => !(_.isEqual(firstConfig[key], secondConfig[key])),
-    process: (firstConfig, secondConfig) => ({ oldValue: firstConfig, newValue: secondConfig }),
+    process: (firstValue, secondValue) => ({
+      value: {
+        oldValue: firstValue,
+        newValue: secondValue,
+      },
+    }),
   },
+
   {
     type: 'unchanged',
     check: (key, firstConfig, secondConfig) => _.isEqual(firstConfig[key], secondConfig[key]),
-    process: firstConfig => _.identity(firstConfig),
+    process: firstValue => ({
+      value: firstValue,
+    }),
   },
+
 ];
 
 const genAST = (firstConfig, secondConfig) => {
@@ -37,8 +60,10 @@ const genAST = (firstConfig, secondConfig) => {
   return allKeys.map((key) => {
     const { type, process } =
       _.find(keyTypes, ({ check }) => check(key, firstConfig, secondConfig));
-    const value = process(firstConfig[key], secondConfig[key], genAST);
-    return { name: key, type, value };
+    const { value, children = [] } = process(firstConfig[key], secondConfig[key], genAST);
+    return {
+      key, type, value, children,
+    };
   });
 };
 
