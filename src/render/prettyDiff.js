@@ -16,18 +16,14 @@ const diffStyles = {
   nested: (name, value, tabLvl, renderFunc) =>
     `${_.repeat(tab, tabLvl)}  ${name}: {\n${_.flatten(renderFunc(value, tabLvl + 2)).join('\n')}\n${_.repeat(tab, tabLvl + 1)}}`,
 
-
   added: (name, value, tabLvl) =>
     `${_.repeat(tab, tabLvl)}+ ${name}: ${stringify(value, tabLvl)}`,
-
 
   deleted: (name, value, tabLvl) =>
     `${_.repeat(tab, tabLvl)}- ${name}: ${stringify(value, tabLvl)}`,
 
-
   updated: (name, { oldValue, newValue }, tabLvl) =>
     [`${_.repeat(tab, tabLvl)}+ ${name}: ${stringify(newValue, tabLvl)}`, `${_.repeat(tab, tabLvl)}- ${name}: ${stringify(oldValue, tabLvl)}`],
-
 
   unchanged: (name, value, tabLvl) =>
     `${_.repeat(tab, tabLvl)}  ${name}: ${stringify(value, tabLvl)}`,
