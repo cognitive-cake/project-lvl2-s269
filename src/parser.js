@@ -8,11 +8,11 @@ const parsers = {
   '.ini': ini.parse,
 };
 
-const getParser = (ext) => {
+const parseFileContent = (ext) => {
   if (!parsers[ext]) {
     throw new Error(`unsupported file format ${ext}`);
   }
   return parsers[ext];
 };
 
-export default getParser;
+export default parseFileContent;
