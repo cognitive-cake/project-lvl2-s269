@@ -1,6 +1,6 @@
 {
   "name": "gendiff-cake",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "description": "Difference calculator app by Cognitive Cake",
   "main": "dist/index.js",
   "bin": {
