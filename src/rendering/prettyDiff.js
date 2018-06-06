@@ -16,7 +16,7 @@ const stringify = (val, tabLvl) => {
 const diffStyles = {
 
   nested: (key, value, tabLvl, renderFunc, children) =>
-    `${tabulate(tabLvl)}  ${key}: {\n${_.flatten(renderFunc(children, tabLvl + 2)).join('\n')}\n${tabulate(tabLvl, 1)}}`,
+    `${tabulate(tabLvl)}  ${key}: ${renderFunc(children, tabLvl + 1)}`,
 
   added: (key, value, tabLvl) =>
     `${tabulate(tabLvl)}+ ${key}: ${stringify(value, tabLvl)}`,
@@ -32,15 +32,15 @@ const diffStyles = {
 
 };
 
-const renderPrettyDiff = (ast, tabFirstLvl) => {
-  const genDiff = (node, tabLvl) => node.map(({
+const renderPrettyDiff = (ast, currentTabLvl) => {
+  const getDiffStyle = (node, tabLvl) => node.map(({
     key,
     type,
     value,
     children,
-  }) => diffStyles[type](key, value, tabLvl, genDiff, children));
+  }) => diffStyles[type](key, value, tabLvl, renderPrettyDiff, children));
 
-  return `{\n${_.flatten(genDiff(ast, tabFirstLvl)).join('\n')}\n}`;
+  return `{\n${_.flatten(getDiffStyle(ast, currentTabLvl + 1)).join('\n')}\n${tabulate(currentTabLvl)}}`;
 };
 
 
