@@ -1,15 +1,15 @@
 #!/usr/bin/env node
 
-import programm from 'commander';
+import program from 'commander';
 import genDiff from '..';
 
-programm
+program
   .description('Compares two configuration files and shows a difference.')
   .version('0.5.2', '-v, --version')
-  .option('-p --plain', 'Show diff in plain style')
-  .option('-P --pretty', 'Show diff in pretty style')
+  .option('-f --format [format]', 'Format output', /^(pretty|plain)$/i)
   .arguments('<firstConfig> <secondConfig>')
-  .action((firstConfig, secondConfig) => console.log(genDiff(firstConfig, secondConfig)))
+  .action((firstConfig, secondConfig) =>
+    console.log(genDiff(firstConfig, secondConfig, program.format)))
   .parse(process.argv);
 
-if (!programm.args.length) programm.help();
+if (!program.args.length) program.help();
