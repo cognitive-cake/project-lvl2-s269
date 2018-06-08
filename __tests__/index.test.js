@@ -27,6 +27,7 @@ const formats = {
 const genPathToFixture = category => type => (position = 'none') => format =>
   `${categorys[category]}${types[type]}${positions[position]}${formats[format]}`;
 
+
 test('genDiff test - JSON', () => {
   const expectedDiff = fs.readFileSync(genPathToFixture('expected')('flat')()('txt'), 'utf-8');
   const exampleBefore = genPathToFixture('example')('flat')('before')('json');

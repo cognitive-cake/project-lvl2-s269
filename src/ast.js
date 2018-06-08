@@ -7,10 +7,7 @@ const keyTypes = [
     check: (key, firstConfig, secondConfig) =>
       _.isPlainObject(firstConfig[key]) && _.isPlainObject(secondConfig[key]),
     process: (firstValue, secondValue, genAST) => ({
-      value: {
-        oldValue: firstValue,
-        newValue: secondValue,
-      },
+      value: [firstValue, secondValue],
       children: genAST(firstValue, secondValue),
     }),
   },
@@ -35,10 +32,7 @@ const keyTypes = [
     type: 'updated',
     check: (key, firstConfig, secondConfig) => !(_.isEqual(firstConfig[key], secondConfig[key])),
     process: (firstValue, secondValue) => ({
-      value: {
-        oldValue: firstValue,
-        newValue: secondValue,
-      },
+      value: [firstValue, secondValue],
     }),
   },
 
@@ -60,9 +54,9 @@ const genAST = (firstConfig, secondConfig) => {
   return allKeys.map((key) => {
     const { type, process } =
       _.find(keyTypes, ({ check }) => check(key, firstConfig, secondConfig));
-    const { value, children = [] } = process(firstConfig[key], secondConfig[key], genAST);
+    const processResult = process(firstConfig[key], secondConfig[key], genAST);
     return {
-      key, type, value, children,
+      key, type, ...processResult,
     };
   });
 };

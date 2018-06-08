@@ -24,7 +24,7 @@ const diffStyles = {
   deleted: (key, value, tabLvl) =>
     `${tabulate(tabLvl)}- ${key}: ${stringify(value, tabLvl)}`,
 
-  updated: (key, { oldValue, newValue }, tabLvl) =>
+  updated: (key, [oldValue, newValue], tabLvl) =>
     [`${tabulate(tabLvl)}+ ${key}: ${stringify(newValue, tabLvl)}`, `${tabulate(tabLvl)}- ${key}: ${stringify(oldValue, tabLvl)}`],
 
   unchanged: (key, value, tabLvl) =>
