@@ -4,3 +4,7 @@
 ## Use
 
 `gendiff [options] <firstConfig> <secondConfig>`
+
+### Options
+
+`-f --format [format]` --- Format output: plain or pretty (default pretty)
