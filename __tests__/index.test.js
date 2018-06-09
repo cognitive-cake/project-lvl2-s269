@@ -9,6 +9,7 @@ const categorys = {
 const types = {
   flat: 'flat',
   nested: 'nested',
+  plain: 'plain',
 };
 
 const positions = {
@@ -75,4 +76,13 @@ test('genDiff test - INI nested', () => {
   const exampleAfter = genPathToFixture('example')('nested')('after')('ini');
 
   return expect(genDiff(exampleBefore, exampleAfter)).toEqual(expectedDiff);
+});
+
+
+test('genDiff test - JSON nested plain', () => {
+  const expectedDiff = fs.readFileSync(genPathToFixture('expected')('plain')()('txt'), 'utf-8');
+  const exampleBefore = genPathToFixture('example')('plain')('before')('json');
+  const exampleAfter = genPathToFixture('example')('plain')('after')('json');
+
+  return expect(genDiff(exampleBefore, exampleAfter, 'plain')).toEqual(expectedDiff);
 });
