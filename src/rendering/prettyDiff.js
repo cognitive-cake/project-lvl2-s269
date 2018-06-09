@@ -32,7 +32,7 @@ const diffStyles = {
 
 };
 
-const renderPrettyDiff = (ast, currentTabLvl) => {
+const renderPrettyDiff = (ast, currentTabLvl = 0) => {
   const getDiffStyle = (node, tabLvl) => node.map(({
     key,
     type,

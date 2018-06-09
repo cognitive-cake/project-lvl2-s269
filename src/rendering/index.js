@@ -6,6 +6,6 @@ const formats = {
   pretty: renderPrettyDiff,
 };
 
-const renderDiff = (ast, format = 'pretty') => formats[format](ast, 0);
+const renderDiff = (ast, format = 'pretty') => formats[format](ast);
 
 export default renderDiff;
