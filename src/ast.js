@@ -7,8 +7,8 @@ const keyTypes = [
     check: (key, firstConfig, secondConfig) =>
       _.isPlainObject(firstConfig[key]) && _.isPlainObject(secondConfig[key]),
     process: (firstValue, secondValue, genAST) => ({
-      valueOld: firstValue,
-      valueNew: secondValue,
+      oldValue: firstValue,
+      newValue: secondValue,
       children: genAST(firstValue, secondValue),
     }),
   },
@@ -17,8 +17,8 @@ const keyTypes = [
     type: 'added',
     check: (key, firstConfig) => !(_.has(firstConfig, key)),
     process: (firstValue, secondValue) => ({
-      valueOld: firstValue,
-      valueNew: secondValue,
+      oldValue: firstValue,
+      newValue: secondValue,
     }),
   },
 
@@ -26,8 +26,8 @@ const keyTypes = [
     type: 'deleted',
     check: (key, firstConfig, secondConfig) => !(_.has(secondConfig, key)),
     process: (firstValue, secondValue) => ({
-      valueOld: firstValue,
-      valueNew: secondValue,
+      oldValue: firstValue,
+      newValue: secondValue,
     }),
   },
 
@@ -35,8 +35,8 @@ const keyTypes = [
     type: 'updated',
     check: (key, firstConfig, secondConfig) => !(_.isEqual(firstConfig[key], secondConfig[key])),
     process: (firstValue, secondValue) => ({
-      valueOld: firstValue,
-      valueNew: secondValue,
+      oldValue: firstValue,
+      newValue: secondValue,
     }),
   },
 
@@ -44,8 +44,8 @@ const keyTypes = [
     type: 'unchanged',
     check: (key, firstConfig, secondConfig) => _.isEqual(firstConfig[key], secondConfig[key]),
     process: (firstValue, secondValue) => ({
-      valueOld: firstValue,
-      valueNew: secondValue,
+      oldValue: firstValue,
+      newValue: secondValue,
     }),
   },
 

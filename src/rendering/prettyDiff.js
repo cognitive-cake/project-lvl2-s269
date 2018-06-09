@@ -15,20 +15,20 @@ const stringify = (val, tabLvl) => {
 
 const diffStyles = {
 
-  nested: (key, valueOld, valueNew, tabLvl, renderFunc, children) =>
+  nested: (key, oldValue, newValue, tabLvl, renderFunc, children) =>
     `${tabulate(tabLvl)}  ${key}: ${renderFunc(children, tabLvl + 1)}`,
 
-  added: (key, valueOld, valueNew, tabLvl) =>
-    `${tabulate(tabLvl)}+ ${key}: ${stringify(valueNew, tabLvl)}`,
+  added: (key, oldValue, newValue, tabLvl) =>
+    `${tabulate(tabLvl)}+ ${key}: ${stringify(newValue, tabLvl)}`,
 
-  deleted: (key, valueOld, valueNew, tabLvl) =>
-    `${tabulate(tabLvl)}- ${key}: ${stringify(valueOld, tabLvl)}`,
+  deleted: (key, oldValue, newValue, tabLvl) =>
+    `${tabulate(tabLvl)}- ${key}: ${stringify(oldValue, tabLvl)}`,
 
-  updated: (key, valueOld, valueNew, tabLvl) =>
-    [`${tabulate(tabLvl)}+ ${key}: ${stringify(valueNew, tabLvl)}`, `${tabulate(tabLvl)}- ${key}: ${stringify(valueOld, tabLvl)}`],
+  updated: (key, oldValue, newValue, tabLvl) =>
+    [`${tabulate(tabLvl)}+ ${key}: ${stringify(newValue, tabLvl)}`, `${tabulate(tabLvl)}- ${key}: ${stringify(oldValue, tabLvl)}`],
 
-  unchanged: (key, valueOld, valueNew, tabLvl) =>
-    `${tabulate(tabLvl)}  ${key}: ${stringify(valueOld, tabLvl)}`,
+  unchanged: (key, oldValue, newValue, tabLvl) =>
+    `${tabulate(tabLvl)}  ${key}: ${stringify(oldValue, tabLvl)}`,
 
 };
 
@@ -36,10 +36,10 @@ const renderPrettyDiff = (ast, currentTabLvl) => {
   const getDiffStyle = (node, tabLvl) => node.map(({
     key,
     type,
-    valueOld,
-    valueNew,
+    oldValue,
+    newValue,
     children,
-  }) => diffStyles[type](key, valueOld, valueNew, tabLvl, renderPrettyDiff, children));
+  }) => diffStyles[type](key, oldValue, newValue, tabLvl, renderPrettyDiff, children));
 
   return `{\n${_.flatten(getDiffStyle(ast, currentTabLvl + 1)).join('\n')}\n${tabulate(currentTabLvl)}}`;
 };
