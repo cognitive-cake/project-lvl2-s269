@@ -2,24 +2,24 @@ import _ from 'lodash';
 
 const stylesForValues = [
   {
-    check: val => typeof val === 'number',
-    process: _.identity
+    check: val => Number.isInteger(+val),
+    process: _.identity,
+  },
+  {
+    check: val => val.search(/true|false/i) !== -1,
+    process: _.identity,
   },
   {
     check: val => typeof val === 'string',
-    process: val => `'${val}'`
+    process: val => `'${val}'`,
   },
-  {
-    check: val => typeof val === 'boolean',
-    process: _.identity
-  }
 ];
 
 const stringify = (val) => {
   if (_.isPlainObject(val)) {
     return 'complex value';
   }
-  const { process } =_.find(stylesForValues, ({ check }) => check(val));
+  const { process } = _.find(stylesForValues, ({ check }) => check(val));
   return process(val);
 };
 
@@ -34,15 +34,15 @@ const diffStyles = {
   deleted: (key, oldValue, newValue, parent) =>
     `Property '${parent}${key}' was deleted`,
 
-  updated: (key, oldValue, newValue, parent) => 
+  updated: (key, oldValue, newValue, parent) =>
     `Property '${parent}${key}' was updated. From ${stringify(oldValue)} to ${stringify(newValue)}`,
 
-  unchanged: () => ''
+  unchanged: () => '',
 
 };
 
 const renderPlainDiff = (ast, parent = '') => {
-  const getDiffStyle = (node) => node.map(({
+  const getDiffStyle = node => node.map(({
     key,
     type,
     oldValue,

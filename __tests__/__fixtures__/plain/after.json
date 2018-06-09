@@ -17,7 +17,9 @@
     "group1": {
         "foo": "bar",
         "baz": "bars",
-        "nest": "str"
+        "nest": "str",
+        "rest": "350",
+        "boolean": "false"
     },
 
     "group3": {
