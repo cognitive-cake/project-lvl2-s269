@@ -2,12 +2,12 @@ import _ from 'lodash';
 
 const stylesForValues = [
   {
-    check: val => typeof val === 'string',
-    process: val => `'${val}'`
-  },
-  {
     check: val => typeof val === 'number',
     process: _.identity
+  },
+  {
+    check: val => typeof val === 'string',
+    process: val => `'${val}'`
   },
   {
     check: val => typeof val === 'boolean',
