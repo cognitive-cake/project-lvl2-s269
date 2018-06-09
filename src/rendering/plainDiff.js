@@ -1,19 +1,23 @@
 // import _ from 'lodash';
 
-const renderPlainDiff = ast => ast
-  .filter(obj => obj.keyStatus !== 'not updated')
-  .map(({
-    key,
-    keyStatus,
-    value: [valBefore, valAfter],
-  }) => {
-    if (keyStatus === 'updated') {
-      return `Property '${key}' was updated. From '${valBefore}' to '${valAfter}'`;
-    }
-    if (keyStatus === 'added') {
-      return `Property '${key}' was added with value: ${valAfter}`;
-    }
-    return `Property '${key}' was deleted.`;
-  });
+const diffStyles = {
+
+  nested: (key, oldValue, newValue, tabLvl, renderFunc, children) =>
+    `${tabulate(tabLvl)}  ${key}: ${renderFunc(children, tabLvl + 1)}`,
+
+  added: (key, oldValue, newValue, tabLvl) =>
+    `${tabulate(tabLvl)}+ ${key}: ${stringify(newValue, tabLvl)}`,
+
+  deleted: (key, oldValue, newValue, tabLvl) =>
+    `${tabulate(tabLvl)}- ${key}: ${stringify(oldValue, tabLvl)}`,
+
+  updated: (key, oldValue, newValue, tabLvl) => [`${tabulate(tabLvl)}+ ${key}: ${stringify(newValue, tabLvl)}`, `${tabulate(tabLvl)}- ${key}: ${stringify(oldValue, tabLvl)}`],
+
+  unchanged: (key, oldValue, newValue, tabLvl) =>
+    `${tabulate(tabLvl)}  ${key}: ${stringify(oldValue, tabLvl)}`,
+
+};
+
+const renderPlainDiff = (ast) => {};
 
 export default renderPlainDiff;
