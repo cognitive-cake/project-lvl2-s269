@@ -1,26 +1,10 @@
 import _ from 'lodash';
 
-const stylesForValues = [
-  {
-    check: val => _.isFinite(_.toNumber(val)),
-    process: _.identity,
-  },
-  {
-    check: val => val.search(/true|false/i) !== -1,
-    process: _.identity,
-  },
-  {
-    check: _.isString,
-    process: val => `'${val}'`,
-  },
-];
-
 const stringify = (val) => {
   if (_.isPlainObject(val)) {
     return 'complex value';
   }
-  const { process } = _.find(stylesForValues, ({ check }) => check(val));
-  return process(val);
+  return `'${val}'`;
 };
 
 const diffStyles = {

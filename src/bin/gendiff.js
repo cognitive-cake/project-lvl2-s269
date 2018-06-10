@@ -6,7 +6,7 @@ import genDiff from '..';
 program
   .description('Compares two configuration files and shows a difference.')
   .version('0.6.2', '-v, --version')
-  .option('-f --format [format]', 'Format output', /^(pretty|plain)$/i)
+  .option('-f --format [format]', 'Format output', /^(pretty|plain|json)$/i)
   .arguments('<firstConfig> <secondConfig>')
   .action((firstConfig, secondConfig) =>
     console.log(genDiff(firstConfig, secondConfig, program.format)))
