@@ -10,6 +10,7 @@ const types = {
   flat: 'flat',
   nested: 'nested',
   plain: 'plain',
+  json: 'json',
 };
 
 const positions = {
@@ -85,4 +86,13 @@ test('genDiff test - JSON nested plain', () => {
   const exampleAfter = genPathToFixture('example')('plain')('after')('json');
 
   return expect(genDiff(exampleBefore, exampleAfter, 'plain')).toEqual(expectedDiff);
+});
+
+
+test('genDiff test - JSON nested JSON output', () => {
+  const expectedDiff = fs.readFileSync(genPathToFixture('expected')('json')()('json'), 'utf-8');
+  const exampleBefore = genPathToFixture('example')('json')('before')('json');
+  const exampleAfter = genPathToFixture('example')('json')('after')('json');
+
+  return expect(genDiff(exampleBefore, exampleAfter, 'json')).toEqual(expectedDiff);
 });
