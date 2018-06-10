@@ -7,4 +7,4 @@
 
 ### Options
 
-`-f --format [format]`  ---  Format output: plain or pretty (default pretty)
+`-f --format [format]`  ---  Format output: plain, pretty or json (default pretty)
