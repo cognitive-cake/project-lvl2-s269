@@ -5,24 +5,24 @@ const diffStyles = {
   nested: (key, type, oldValue, newValue, parent, renderFunc, children) =>
     renderFunc(children, `${parent}${key}.`),
 
-  added: (key, type, oldValue, newValue, parent) => [{
+  added: (key, type, oldValue, newValue, parent) => ({
     key: `${parent}${key}`,
     type,
     newValue,
-  }],
+  }),
 
-  deleted: (key, type, oldValue, newValue, parent) => [{
+  deleted: (key, type, oldValue, newValue, parent) => ({
     key: `${parent}${key}`,
     type,
     oldValue,
-  }],
+  }),
 
-  updated: (key, type, oldValue, newValue, parent) => [{
+  updated: (key, type, oldValue, newValue, parent) => ({
     key: `${parent}${key}`,
     type,
     oldValue,
     newValue,
-  }],
+  }),
 
 };
 
