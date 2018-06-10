@@ -91,7 +91,6 @@ test('genDiff test - JSON nested plain', () => {
 
 test('genDiff test - JSON nested JSON output', () => {
   const expectedDiff = fs.readFileSync(genPathToFixture('expected')('json')()('json'), 'utf-8');
-  // const fileContent = JSON.parse(fileContent);
   const exampleBefore = genPathToFixture('example')('json')('before')('json');
   const exampleAfter = genPathToFixture('example')('json')('after')('json');
 
