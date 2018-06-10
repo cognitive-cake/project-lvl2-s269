@@ -2,7 +2,7 @@ import _ from 'lodash';
 
 const stylesForValues = [
   {
-    check: val => Number.isInteger(+val),
+    check: val => _.isFinite(_.toNumber(val)),
     process: _.identity,
   },
   {
@@ -10,7 +10,7 @@ const stylesForValues = [
     process: _.identity,
   },
   {
-    check: val => typeof val === 'string',
+    check: _.isString,
     process: val => `'${val}'`,
   },
 ];
@@ -37,22 +37,20 @@ const diffStyles = {
   updated: (key, oldValue, newValue, parent) =>
     `Property '${parent}${key}' was updated. From ${stringify(oldValue)} to ${stringify(newValue)}`,
 
-  unchanged: () => '',
-
 };
 
 const renderPlainDiff = (ast, parent = '') => {
-  const getDiffStyle = node => node.map(({
-    key,
-    type,
-    oldValue,
-    newValue,
-    children,
-  }) => diffStyles[type](key, oldValue, newValue, parent, renderPlainDiff, children));
+  const getDiffStyle = node => node
+    .filter(({ type }) => type !== 'unchanged')
+    .map(({
+      key,
+      type,
+      oldValue,
+      newValue,
+      children,
+    }) => diffStyles[type](key, oldValue, newValue, parent, renderPlainDiff, children));
 
-  return getDiffStyle(ast)
-    .filter(diff => diff !== '')
-    .join('\n');
+  return getDiffStyle(ast).join('\n');
 };
 
 export default renderPlainDiff;
