@@ -1,3 +1,1 @@
-const renderJsonDiff = ast => JSON.stringify(ast);
-
-export default renderJsonDiff;
+export default JSON.stringify;
