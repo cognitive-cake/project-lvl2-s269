@@ -16,4 +16,3 @@ rules:
   no-console: 0
   fp/no-unused-expression: 0 # for console.log use
   fp/no-throw: 0 # for throw use
-  fp/no-rest-parameters: 0 # for rest-operations
