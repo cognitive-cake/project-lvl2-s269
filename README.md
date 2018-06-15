@@ -16,7 +16,7 @@ Property 'group2' was deleted
 Property 'group3' was added with value: complex value
 ```
 
-## Use
+## Usage
 
 `gendiff [options] <firstConfig> <secondConfig>`
 
